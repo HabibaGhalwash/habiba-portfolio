@@ -28,15 +28,7 @@ import ncwActivities from '../assets/img/ncw-activities.jpg'
 import ncwWelcome from '../assets/img/ncw-app-welcome.jpg'
 import ncwLogin from '../assets/img/ncw-app-login.jpg'
 
-export const profile = {
-  name: 'Habiba Ghalwash',
-  email: 'habibamohamedghalwash@gmail.com',
-  phone: '+201001641539',
-  phoneLabel: '+20 100 164 1539',
-  linkedin: 'https://www.linkedin.com/in/habiba-ghalwash',
-  github: 'https://github.com/HabibaGhalwash',
-  city: 'Cairo, Egypt',
-}
+
 
 export const navLinks = [
   { href: '#about', label: 'About' },
