@@ -3,7 +3,7 @@
 //  Edit the text here; swap images by replacing files in
 //  src/assets/img (keep the same file names).
 // ──────────────────────────────────────────────────────────────
-
+import heroPhoto from '../assets/img/hero-habiba.png'
 import ccHome from '../assets/img/careconnect-home.jpg'
 import ccAppDemo from '../assets/img/careconnect-app-demo.webp'
 import ccSignup from '../assets/img/cc-signup.jpg'
