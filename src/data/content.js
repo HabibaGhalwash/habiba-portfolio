@@ -51,7 +51,7 @@ export { heroPhoto }
 // floating stickers around the hero (positions are viewport-relative)
 export const stickers = [
   { text: '⚛ React', depth: 38, style: { top: '30vh', left: '8vw', background: 'var(--butter)', color: 'var(--brown)', '--r': '-8deg', animationDelay: '1.0s' }, hideOnMobile: false, bob: '0s' },
-
+  { text: '📊 Power BI', depth: -44, style: { top: '24vh', right: '9vw', background: 'var(--sage)', color: 'var(--brown)', '--r': '7deg', animationDelay: '1.15s' }, hideOnMobile: false, bob: '.4s' },
   { text: '🎓 3.93 GPA', depth: 52, style: { top: '52vh', left: '20vw', background: 'var(--pink)', color: 'var(--brown)', '--r': '5deg', animationDelay: '1.3s' }, hideOnMobile: true, bob: '.8s' },
   { text: '🗄 SQL', depth: -36, style: { top: '50vh', right: '17vw', background: 'var(--orange)', color: 'var(--brown)', '--r': '-6deg', animationDelay: '1.45s' }, hideOnMobile: true, bob: '1.2s' },
   { text: '📱 React Native', depth: 30, style: { top: '70vh', right: '6vw', background: 'var(--butter)', color: 'var(--brown)', '--r': '9deg', animationDelay: '1.6s' }, hideOnMobile: true, bob: '.2s' },
