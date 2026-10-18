@@ -4,6 +4,74 @@ import { onPointer } from '../lib/pointer'
 import { useMagnetic } from '../hooks/useMagnetic'
 import Typed from './Typed'
 
+function BadgeIcon({ name }) {
+  const common = {
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.8,
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    'aria-hidden': 'true',
+  }
+
+  switch (name) {
+    case 'react':
+      return (
+        <svg {...common}>
+          <ellipse cx="12" cy="12" rx="7" ry="3.3" transform="rotate(0 12 12)" />
+          <ellipse cx="12" cy="12" rx="7" ry="3.3" transform="rotate(60 12 12)" />
+          <ellipse cx="12" cy="12" rx="7" ry="3.3" transform="rotate(120 12 12)" />
+          <circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none" />
+        </svg>
+      )
+    case 'powerbi':
+      return (
+        <svg {...common}>
+          <path d="M5 19V6.5A1.5 1.5 0 0 1 6.5 5H12v14H5Z" />
+          <path d="M12 10h5.5A1.5 1.5 0 0 1 19 11.5V19h-7v-9Z" />
+          <path d="M8 9.5h1.5M8 13h1.5M8 16.5h1.5" />
+          <path d="M14 13h1.5M14 16.5h1.5" />
+        </svg>
+      )
+    case 'cap':
+      return (
+        <svg {...common}>
+          <path d="M3.5 9.5 12 5l8.5 4.5L12 14 3.5 9.5Z" />
+          <path d="M7 11.3v3.7c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-3.7" />
+          <path d="M12 14v4" />
+        </svg>
+      )
+    case 'database':
+      return (
+        <svg {...common}>
+          <ellipse cx="12" cy="6" rx="6.5" ry="2.5" />
+          <path d="M5.5 6v6c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5V6" />
+          <path d="M5.5 12v6c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5v-6" />
+        </svg>
+      )
+    case 'mobile':
+      return (
+        <svg {...common}>
+          <rect x="7" y="2.5" width="10" height="19" rx="2.5" />
+          <path d="M10 18.5h4" />
+          <circle cx="12" cy="8" r="1.2" fill="currentColor" stroke="none" />
+        </svg>
+      )
+    case 'system':
+      return (
+        <svg {...common}>
+          <rect x="4" y="5" width="6" height="5" rx="1.4" />
+          <rect x="14" y="5" width="6" height="5" rx="1.4" />
+          <rect x="9" y="14" width="6" height="5" rx="1.4" />
+          <path d="M10 7.5h4M12 10v4M8.5 10.2l2.7 3.2M15.5 10.2l-2.7 3.2" />
+        </svg>
+      )
+    default:
+      return null
+  }
+}
+
 export default function Hero() {
   const root = useRef(null)
   const cta = useRef(null)
@@ -74,8 +142,13 @@ export default function Hero() {
       </div>
 
       {stickers.map((s, i) => (
-        <div key={s.text} className={`L st st-${i}${s.hideOnMobile ? ' x' : ''}`} data-d={s.depth} style={s.style} aria-hidden="true">
-          <b style={{ animationDelay: s.bob }}>{s.text}</b>
+        <div key={s.label} className={`L st st-${i}${s.hideOnMobile ? ' x' : ''}`} data-d={s.depth} style={s.style} aria-hidden="true">
+          <b style={{ animationDelay: s.bob }}>
+            <span className="sticker-inner">
+              <span className="sticker-icon"><BadgeIcon name={s.icon} /></span>
+              <span>{s.label}</span>
+            </span>
+          </b>
         </div>
       ))}
 

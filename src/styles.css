@@ -26,8 +26,11 @@ nav a:hover{background:var(--orange);color:var(--brown);transform:translateY(-3p
 .me{z-index:3;bottom:0;left:50%;margin-left:calc(min(78vh,740px)*-.24);height:min(80vh,760px);animation:rise 1s .5s cubic-bezier(.2,1.2,.4,1) both;pointer-events:none}
 @keyframes rise{from{transform:translateY(60%);opacity:0}to{transform:none;opacity:1}}
 .me img{height:100%;filter:drop-shadow(0 20px 40px #0008)}
-.st{z-index:5;font-weight:700;font-size:clamp(.72rem,1.3vw,1rem);padding:9px 16px;border-radius:99px;white-space:nowrap;animation:pop .7s cubic-bezier(.3,1.9,.5,1) both;cursor:default}
+.st{z-index:5;font-weight:700;font-size:clamp(.72rem,1.3vw,1rem);padding:9px 16px;border-radius:999px;white-space:nowrap;animation:pop .7s cubic-bezier(.3,1.9,.5,1) both;cursor:default;box-shadow:0 3px 0 rgba(35,18,10,.15),inset 0 0 0 1px rgba(58,29,20,.08);transition:transform .2s ease-out}
 .st b{display:inline-block;animation:bob 3s ease-in-out infinite}
+.sticker-inner{display:inline-flex;align-items:center;gap:.58em;line-height:1}
+.sticker-icon{display:inline-flex;align-items:center;justify-content:center;width:1.05em;height:1.05em;flex-shrink:0}
+.sticker-icon svg{display:block;width:100%;height:100%}
 @keyframes pop{from{transform:scale(0) rotate(-40deg);opacity:0}to{transform:scale(1) rotate(var(--r,0deg));opacity:1}}
 @keyframes bob{50%{transform:translateY(-9px)}}
 .tag{position:absolute;z-index:6;left:clamp(20px,5vw,80px);bottom:12vh;max-width:270px;color:var(--butter);animation:fade 1s 1.4s both}
@@ -54,8 +57,10 @@ nav a:hover{background:var(--orange);color:var(--brown);transform:translateY(-3p
 .av3d{display:block;width:100%;height:auto;aspect-ratio:1;cursor:pointer;transform-origin:50% 100%;scale:1.04;touch-action:manipulation}
 .hi{position:absolute;top:-14px;right:-6px;z-index:3;background:var(--brown);color:var(--butter);font:800 1.1rem 'Bricolage Grotesque';padding:12px 20px;border-radius:24px 24px 4px 24px;animation:wv 2.4s ease-in-out infinite}
 @keyframes wv{50%{transform:rotate(-6deg) scale(1.08)}}
-.heart{position:absolute;bottom:30%;font-size:1.6rem;pointer-events:none;z-index:4;animation:hup 1.6s ease-out forwards}
-@keyframes hup{to{transform:translateY(-220px) scale(1.4);opacity:0}}
+.heart{position:absolute;bottom:30%;width:22px;height:22px;pointer-events:none;z-index:4;opacity:0;transform:translate3d(0,40px,0) scale(.7);animation:hup 1.9s cubic-bezier(.18,.8,.2,1) forwards;filter:drop-shadow(0 8px 12px rgba(0,0,0,.18))}
+.heart svg{display:block;width:100%;height:100%}
+.heart--sparkle{width:18px;height:18px}
+@keyframes hup{0%{opacity:0;transform:translate3d(0,10px,0) scale(.7) rotate(0deg)}10%{opacity:1}30%{transform:translate3d(0,-10px,0) scale(1.04) rotate(-8deg)}60%{transform:translate3d(0,-120px,0) scale(1.2) rotate(12deg)}100%{opacity:0;transform:translate3d(0,-230px,0) scale(1.45) rotate(-10deg)}}
 
 /* ───────────── Marquee ───────────── */
 .strip{background:var(--orange);overflow:hidden;white-space:nowrap;padding:16px 0;transform:rotate(-1.5deg) scale(1.03);margin:10px 0}

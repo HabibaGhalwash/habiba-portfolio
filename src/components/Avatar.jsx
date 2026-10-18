@@ -94,12 +94,12 @@ export default function AvatarFrame() {
     const stamp = Date.now()
     const batch = Array.from({ length: 7 }, (_, i) => ({
       id: `${stamp}-${i}`,
-      glyph: ['💗', '✨', '💖'][i % 3],
+      kind: i % 2 === 0 ? 'heart' : 'sparkle',
       left: 25 + Math.random() * 50,
       delay: i * 0.08,
     }))
     setHearts((h) => [...h, ...batch])
-    setTimeout(() => setHearts((h) => h.filter((x) => !batch.includes(x))), 1900)
+    setTimeout(() => setHearts((h) => h.filter((x) => !batch.includes(x))), 2000)
   }, [])
 
   useEffect(() => {
@@ -266,28 +266,27 @@ export default function AvatarFrame() {
         const headPos = { x: 0, y: 0 }
         const vel = { hx: { v: 0 }, hy: { v: 0 }, ex: { v: 0 }, ey: { v: 0 } }
         const blinkStart = { L: -1e9, R: -1e9 }
-        const BLINK_MS = 190
+        const BLINK_MS = 220
         let lastMove = 0
 
         const lidAmount = (k, now) => {
           const p = (now - blinkStart[k]) / BLINK_MS
           if (p < 0 || p > 1) return 0
-          const q = p < 0.38 ? p / 0.38 : 1 - (p - 0.38) / 0.62
-          return q * q * (3 - 2 * q)
+          const easeIn = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2
+          const easeOut = 1 - Math.pow(1 - p, 3)
+          return p < 0.5 ? easeIn * 0.92 : easeOut * 0.92
         }
         const blink = () => {
           blinkStart.L = blinkStart.R = performance.now()
         }
         blinkRef.current = () => {
           blink()
-          later(blink, 260)
         }
         const scheduleBlink = () =>
           later(() => {
             blink()
-            if (Math.random() < 0.2) later(blink, 300)
             scheduleBlink()
-          }, 2300 + Math.random() * 3300)
+          }, 2500 + Math.random() * 3200)
         scheduleBlink()
 
         cleanups.push(
@@ -376,8 +375,24 @@ export default function AvatarFrame() {
         </div>
       </div>
       {hearts.map((h) => (
-        <span key={h.id} className="heart" style={{ left: `${h.left}%`, animationDelay: `${h.delay}s` }}>
-          {h.glyph}
+        <span key={h.id} className={`heart heart--${h.kind}`} style={{ left: `${h.left}%`, animationDelay: `${h.delay}s` }} aria-hidden="true">
+          {h.kind === 'heart' ? (
+            <svg viewBox="0 0 64 64" role="presentation" aria-hidden="true">
+              <defs>
+                <linearGradient id={`heart-gradient-${h.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#ffb4d1" />
+                  <stop offset="50%" stopColor="#f77bb2" />
+                  <stop offset="100%" stopColor="#d44287" />
+                </linearGradient>
+              </defs>
+              <path d="M32 56 10 33.8C3.5 27.3 3.5 16.7 10 10.3 14.6 5.9 21.5 6.6 26 11.3L32 17.6l6-6.3c4.5-4.7 11.4-5.4 16-0.9 6.5 6.4 6.5 16.9 0 23.5L32 56Z" fill={`url(#heart-gradient-${h.id})`} />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 64 64" role="presentation" aria-hidden="true">
+              <path d="M32 10v11M32 43v11M10 32h11M43 32h11M17.5 17.5l7.8 7.8M38.7 38.7l7.8 7.8M46.5 17.5l-7.8 7.8M25.3 38.7l-7.8 7.8" stroke="#f4d35e" strokeWidth="5" strokeLinecap="round" />
+              <circle cx="32" cy="32" r="7" fill="#f6e7a3" opacity="0.7" />
+            </svg>
+          )}
         </span>
       ))}
     </Reveal>
